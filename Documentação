@@ -1,0 +1,15 @@
+Descrição:
+A imagem mostra um esquema de banco de dados com várias tabelas e as relações entre elas. Essa representação visual ilustra como os dados estão estruturados dentro de um banco de dados, indicando como diferentes entidades estão conectadas. Esse tipo de diagrama é relevante para entender a arquitetura de um sistema de banco de dados, o que é crucial para o desenvolvimento e manutenção de software que depende do armazenamento e recuperação de dados.
+
+Tabelas Representadas:
+tasks: Tabela que registra as tarefas a serem realizadas, incluindo título, descrição, status, responsável, data de criação, data de entrega e uma chave estrangeira "id_users". Também possui uma chave primária definida pelo campo "id".
+columns: Tabela que representa as colunas de uma tarefa, como backlog, fazendo, concluído e uma chave estrangeira de id_tasks. Possui uma chave primária definida pelo campo "id".
+tags: Tabela que contém tags associadas aos usuários, como interesses e personalidade. Possui uma chave primária definida pelo campo "id".
+forms: Tabela que armazena formulários, incluindo data de atribuição, título, usuário avaliado, usuário revisor, feedback e algumas chaves estrangeiras de id_users, id_questions e id_answers.. Possui uma chave primária definida pelo campo "id".
+questions: Tabela que registra perguntas, associadas a usuários. Possui uma chave primária definida pelo campo "id".
+notifications: Tabela que registra notificações, incluindo descrição, data, classe (tipo de notificação), id_users, id_tasks e id_forms. Possui uma chave primária definida pelo campo "id".
+logins: Tabela que armazena informações de login dos usuários, como email e senha. Possui uma chave primária definida pelo campo "id".
+answers: Tabela que registra respostas a perguntas, associadas a usuários. Possui uma chave primária definida pelo campo "id".
+
+Relacionamentos:
+As linhas que conectam as tabelas representam os relacionamentos entre elas. Esses relacionamentos podem ser de um para um ou de um para muitos, dependendo de como as linhas se conectam.
