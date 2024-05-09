@@ -1,0 +1,211 @@
+-- ---
+-- Globals
+-- ---
+
+-- SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+-- SET FOREIGN_KEY_CHECKS=0;
+
+-- ---
+-- Table 'users'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `users`;
+		
+CREATE TABLE `users` (
+  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `name` INTEGER NULL DEFAULT NULL,
+  `country` INTEGER NULL DEFAULT NULL,
+  `time_zone` INTEGER NULL DEFAULT NULL,
+  `bio` INTEGER NULL DEFAULT NULL,
+  `email` INTEGER NULL DEFAULT NULL,
+  `photo` INTEGER NULL DEFAULT NULL,
+  `id_tags` INTEGER NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'tasks'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `tasks`;
+		
+CREATE TABLE `tasks` (
+  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `title` INTEGER NULL DEFAULT NULL,
+  `description` INTEGER NULL DEFAULT NULL,
+  `status` INTEGER NULL DEFAULT NULL,
+  `responsible` INTEGER NULL DEFAULT NULL,
+  `created_date` INTEGER NULL DEFAULT NULL,
+  `deliver_date` INTEGER NULL DEFAULT NULL,
+  `id_users` INTEGER NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'columns'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `columns`;
+		
+CREATE TABLE `columns` (
+  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `backlog` INTEGER NULL DEFAULT NULL,
+  `doing` INTEGER NULL DEFAULT NULL,
+  `done` INTEGER NULL DEFAULT NULL,
+  `id_tasks` INTEGER NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'tags'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `tags`;
+		
+CREATE TABLE `tags` (
+  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `interests` INTEGER NULL DEFAULT NULL,
+  `personality` INTEGER NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'forms'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `forms`;
+		
+CREATE TABLE `forms` (
+  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `assignment_date` INTEGER NULL DEFAULT NULL,
+  `title` INTEGER NULL DEFAULT NULL,
+  `rated_user` INTEGER NULL DEFAULT NULL,
+  `reviewer_user` INTEGER NULL DEFAULT NULL,
+  `feedback` INTEGER NULL DEFAULT NULL,
+  `id_users` INTEGER NULL DEFAULT NULL,
+  `id_questions` INTEGER NULL DEFAULT NULL,
+  `id_answers` INTEGER NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'questions'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `questions`;
+		
+CREATE TABLE `questions` (
+  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `questions` INTEGER NULL DEFAULT NULL,
+  `id_users` INTEGER NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'notifications'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `notifications`;
+		
+CREATE TABLE `notifications` (
+  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `description` INTEGER NULL DEFAULT NULL,
+  `date` INTEGER NULL DEFAULT NULL,
+  `class` INTEGER NULL DEFAULT NULL,
+  `id_users` INTEGER NULL DEFAULT NULL,
+  `id_tasks` INTEGER NULL DEFAULT NULL,
+  `id_forms` INTEGER NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'logins'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `logins`;
+		
+CREATE TABLE `logins` (
+  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `email` INTEGER NULL DEFAULT NULL,
+  `password` INTEGER NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'answers'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `answers`;
+		
+CREATE TABLE `answers` (
+  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `id_users` INTEGER NULL DEFAULT NULL,
+  `question_01` INTEGER NULL DEFAULT NULL,
+  `question_02` INTEGER NULL DEFAULT NULL,
+  `question_03` INTEGER NULL DEFAULT NULL,
+  `question_04` INTEGER NULL DEFAULT NULL,
+  `question_05` INTEGER NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Foreign Keys 
+-- ---
+
+ALTER TABLE `users` ADD FOREIGN KEY (id_tags) REFERENCES `tags` (`id`);
+ALTER TABLE `tasks` ADD FOREIGN KEY (id_users) REFERENCES `users` (`id`);
+ALTER TABLE `columns` ADD FOREIGN KEY (id_tasks) REFERENCES `tasks` (`id`);
+ALTER TABLE `forms` ADD FOREIGN KEY (id_users) REFERENCES `users` (`id`);
+ALTER TABLE `forms` ADD FOREIGN KEY (id_questions) REFERENCES `questions` (`id`);
+ALTER TABLE `forms` ADD FOREIGN KEY (id_answers) REFERENCES `answers` (`id`);
+ALTER TABLE `questions` ADD FOREIGN KEY (id_users) REFERENCES `users` (`id`);
+ALTER TABLE `notifications` ADD FOREIGN KEY (id_users) REFERENCES `users` (`id`);
+ALTER TABLE `notifications` ADD FOREIGN KEY (id_tasks) REFERENCES `tasks` (`id`);
+ALTER TABLE `notifications` ADD FOREIGN KEY (id_forms) REFERENCES `forms` (`id`);
+ALTER TABLE `answers` ADD FOREIGN KEY (id_users) REFERENCES `users` (`id`);
+
+-- ---
+-- Table Properties
+-- ---
+
+-- ALTER TABLE `users` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `tasks` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `columns` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `tags` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `forms` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `questions` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `notifications` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `logins` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+-- ALTER TABLE `answers` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ---
+-- Test Data
+-- ---
+
+-- INSERT INTO `users` (`id`,`name`,`country`,`time_zone`,`bio`,`email`,`photo`,`id_tags`) VALUES
+-- ('','','','','','','','');
+-- INSERT INTO `tasks` (`id`,`title`,`description`,`status`,`responsible`,`created_date`,`deliver_date`,`id_users`) VALUES
+-- ('','','','','','','','');
+-- INSERT INTO `columns` (`id`,`backlog`,`doing`,`done`,`id_tasks`) VALUES
+-- ('','','','','');
+-- INSERT INTO `tags` (`id`,`interests`,`personality`) VALUES
+-- ('','','');
+-- INSERT INTO `forms` (`id`,`assignment_date`,`title`,`rated_user`,`reviewer_user`,`feedback`,`id_users`,`id_questions`,`id_answers`) VALUES
+-- ('','','','','','','','','');
+-- INSERT INTO `questions` (`id`,`questions`,`id_users`) VALUES
+-- ('','','');
+-- INSERT INTO `notifications` (`id`,`description`,`date`,`class`,`id_users`,`id_tasks`,`id_forms`) VALUES
+-- ('','','','','','','');
+-- INSERT INTO `logins` (`id`,`email`,`password`) VALUES
+-- ('','','');
+-- INSERT INTO `answers` (`id`,`id_users`,`question_01`,`question_02`,`question_03`,`question_04`,`question_05`) VALUES
+-- ('','','','','','','');
